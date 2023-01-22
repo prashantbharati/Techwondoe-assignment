@@ -14,11 +14,6 @@ const App = () => {
   const [showAddEditTransactionModal, setShowAddEditTransactionModal] =
     React.useState(false);
 
-  const [transactionsData, setTransactionsData] = React.useState([]);
-  const [frequency, setFrequency] = React.useState("7");
-  const [type, setType] = React.useState("all");
-  const [selectedRange, setSelectedRange] = React.useState([]);
-  const [viewType, setViewType] = React.useState("table");
   const [selectedItemForEdit, setSelectedItemForEdit] = React.useState(null);
   useState(false);
   useEffect(() => {
@@ -44,17 +39,21 @@ const App = () => {
   return (
     <div className="container mt-5">
       {loading && <Spinner />}
-      <div className="filter d-flex justify-content-between align-items-center">
-        <div className="d-flex">
+
+      <div className="d-flex flex-row ">
+        <div>
+          <h1 className="text-primary mb-3">Company Settings</h1>
+        </div>
+
+        <div className="ml-5 d-flex justify-content-end">
           <button
-            className="primary"
+            className="btn btn-primary"
             onClick={() => setShowAddEditTransactionModal(true)}
           >
             ADD NEW
           </button>
         </div>
       </div>
-      <h1 className="text-primary mb-3">My Blog</h1>
       <Posts
         posts={currentPosts}
         loading={loading}
@@ -62,17 +61,20 @@ const App = () => {
         setShowAddEditTransactionModal={setShowAddEditTransactionModal}
         setLoading={setLoading}
       />
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      />
+      <div className=" d-flex justify-content-center mt-2">
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
+      </div>
       {showAddEditTransactionModal && (
         <AddEditTransaction
           showAddEditTransactionModal={showAddEditTransactionModal}
           setShowAddEditTransactionModal={setShowAddEditTransactionModal}
           selectedItemForEdit={selectedItemForEdit}
           setSelectedItemForEdit={setSelectedItemForEdit}
+          posts={posts}
         />
       )}
     </div>

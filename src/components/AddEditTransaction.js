@@ -1,16 +1,23 @@
 import React, { useState } from "react";
-import { Form, Input, message, Modal, Select } from "antd";
+import { Form, Input, Modal } from "antd";
 import Spinner from "./Spinner";
-import axios from "axios";
 
 function AddEditTransaction({
   setShowAddEditTransactionModal,
   showAddEditTransactionModal,
   selectedItemForEdit,
   setSelectedItemForEdit,
+  posts,
 }) {
-  const [loading, setLoading] = useState(false);
-  const onFinish = async (values) => {};
+  const onFinish = async (values) => {
+    posts = { ...posts, values };
+    console.log(posts);
+
+    setShowAddEditTransactionModal(false);
+  };
+
+  const [loading] = useState(false);
+
   return (
     <Modal
       title={selectedItemForEdit ? "Edit Transaction" : "Add Transaction"}
@@ -25,41 +32,19 @@ function AddEditTransaction({
         onFinish={onFinish}
         initialValues={selectedItemForEdit}
       >
-        <Form.Item label="Amount" name="amount">
+        <Form.Item label="User Id" name="userId">
+          <Input type="number" />
+        </Form.Item>
+
+        <Form.Item label="Id" name="id">
+          <Input type="number" />
+        </Form.Item>
+
+        <Form.Item label="Title" name="title">
           <Input type="text" />
         </Form.Item>
 
-        <Form.Item label="Type" name="type">
-          <Select>
-            <Select.Option value="Income">Income</Select.Option>
-            <Select.Option value="Expence">Expence</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item label="Category" name="category">
-          <Select>
-            {" "}
-            <Select.Option value="Salary">Salary</Select.Option>
-            <Select.Option value="Freelance">Freelance</Select.Option>
-            <Select.Option value="Food">Food</Select.Option>
-            <Select.Option value="Entertainment">Entertainment</Select.Option>
-            <Select.Option value="Investment">Investment</Select.Option>
-            <Select.Option value="Travel">Travel</Select.Option>
-            <Select.Option value="Education">Education</Select.Option>
-            <Select.Option value="Medical">Medical</Select.Option>
-            <Select.Option value="Tax">Tax</Select.Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item label="Date" name="date">
-          <Input type="date" />
-        </Form.Item>
-
-        <Form.Item label="Reference" name="reference">
-          <Input type="text" />
-        </Form.Item>
-
-        <Form.Item label="Description" name="description">
+        <Form.Item label="Body" name="body">
           <Input type="text" />
         </Form.Item>
 

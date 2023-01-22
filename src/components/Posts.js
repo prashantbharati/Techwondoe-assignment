@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BasicTable from "./Table";
 const Posts = ({
   posts,
@@ -8,10 +8,6 @@ const Posts = ({
   setLoading,
 }) => {
   console.log(posts);
-
-  const [id, setId] = useState("0");
-  const [title, setTitle] = useState("title");
-  const [body, setBody] = useState(["Body"]);
 
   if (loading) {
     return <h2>Loading...</h2>;
